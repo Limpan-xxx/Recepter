@@ -36,12 +36,12 @@
 		.navbar_container 
 		{
 			display: flex;
-			justify-content: space-between;
+			justify-content: flex-start;
 			height: 80px;
 			z-index: 1;
 			width: 100%;
-			max-width: 1300px;
-			margin: 0 auto;
+			max-width: 100%;
+			margin-right: 10px;
 			padding: 0 0px;
 			
 		}
@@ -53,6 +53,7 @@
 			align-items: center;
 			list-style: none;
 			text-align: center;
+			margin-left: auto;
 		}
 		
 		.navbar_item
@@ -63,7 +64,8 @@
 		
 		.navbar_logo
 		{
-			margin-left: 30px;
+			margin-left: 10px;
+			margin-bottom: 7px;
 			font-size: 40px;
 			font-family: 'Dancing Script', cursive;
 			color: white;
@@ -153,7 +155,7 @@
 			box-shadow: 0 0 0 5px #0000;
 			overflow: hidden;
 			margin-top: 10px;
-			margin-left: 10px;
+			margin-left: 20px;
 			text-align: center;
 		}
 		
@@ -308,6 +310,7 @@
 			{
 				position: absolute;
 				text-align: center;
+				display: none;
 			}
 			
 			.navbar_links 
@@ -500,26 +503,26 @@
 
 <body>
 	<nav class="navbar">
-		<div class="navbar_logo">Recepter</div>
+	<div class="navbar_logo">Recepter</div>
 		<div class="navbar_container">
-			<div class="search">
-				<div class="icon"></div>
-				<div class="input">
-					<input type="text" placeholder="sök" id="mysearch">
+				<div class="search">
+					<div class="icon"></div>
+					<div class="input">
+						<input type="text" placeholder="sök" id="mysearch">
+					</div>
+					<span class="clear" onclick="document.getElementById('mysearch').value = '' "></span>
 				</div>
-				<span class="clear" onclick="document.getElementById('mysearch').value = '' "></span>
-			</div>
-			<div class="navbar_toggle" id="mobile-menu">
-				<span class="bar"></span>
-				<span class="bar"></span>
-				<span class="bar"></span>
-			</div>
-			<ul class="navbar_menu">
-				<button class= "navbar_add">+</button>
-				<li class="navbar_btn">
-					<a href="recept.html" class="button">Inköpslista</a>
-				</li>
-			</ul>
+				<ul class="navbar_menu">
+					<button class= "navbar_add">+</button>
+					<li class="navbar_btn">
+						<a href="recept.html" class="button">Inköpslista</a>
+					</li>
+				</ul>
+				<div class="navbar_toggle" id="mobile-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
 		</div>
 	</nav>
 	
