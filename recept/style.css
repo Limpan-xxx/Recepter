@@ -48,7 +48,6 @@
     height: 80px;
 }
 
-
 .navbar_logo
 {
     margin-left: 10px;
@@ -72,7 +71,6 @@
 
 .navbar_add
 {
-    border: none;
     background-color: #fff;
     color: #168039;
     text-align: center;
@@ -81,10 +79,9 @@
     font-size: 35px;
     margin: 10px 6px;
     width: 70px;
-    height: 50px;
-    border-radius: 40px;
+    height: 55px;
     margin-right: 10px;
-    
+    border-radius: 10px;
 }
 
 .navbar_btn
@@ -95,6 +92,7 @@
     padding: 0 0px;
     width: 100%;
 }
+
 
 .button
 {
@@ -345,6 +343,16 @@ ul
         background-color: white;
         color: white;
         margin: 6px;
+    }
+
+    #adder
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 80px;
+        margin: 0;
     }
     
     .search

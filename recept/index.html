@@ -14,7 +14,7 @@
 
 <body>
 	<nav class="navbar">
-	<div class="navbar_logo">Recepter</div>
+		<div class="navbar_logo">Recepter</div>
 		<div class="navbar_container">
 				<div class="search">
 					<div class="icon"></div>
@@ -24,8 +24,8 @@
 					<span class="clear" onclick="document.getElementById('mysearch').value = '' "></span>
 				</div>
 				<ul class="navbar_menu">
-					<button class= "navbar_add">+</button>
 					<li class="navbar_btn">
+						<a href=recept_test.php class="button" style="margin: 10px;">+</a>
 						<a href="recept.html" class="button">Inköpslista</a>
 					</li>
 				</ul>
@@ -36,7 +36,8 @@
 				</div>
 		</div>
 	</nav>
-	
+
+
 	<script>
 		const menu = document.querySelector('#mobile-menu')
 		const menuLinks = document.querySelector('.navbar_menu')
