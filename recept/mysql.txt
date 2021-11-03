@@ -1,0 +1,12 @@
+CREATE TABLE recept (
+    Id VARCHAR (50) PRIMARY KEY,
+    Namn VARCHAR (500) NOT NULL
+);
+
+CREATE TABLE ingredienser (
+    Ingrediens VARCHAR (500) NOT NULL,
+    Mangd INT NOT NULL,
+    Enhet VARCHAR (50) NOT NULL,
+    receptID VARCHAR (50) ,
+   	FOREIGN KEY (receptID) REFERENCES recept (Id)
+);  

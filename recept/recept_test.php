@@ -1,3 +1,9 @@
+<?php 
+
+	header('Content-Type: text/html; charset=utf-8');
+
+?>
+
 <style>
  body
 {
@@ -35,6 +41,13 @@ input[type=number]
 
 
 }
+#receptname
+{
+	margin-left: 158px;
+	height: 70px;
+	width: 400px;
+	font-size: 30px;
+}
 .skickat
 {
 	 background-color: #168039;
@@ -43,8 +56,6 @@ input[type=number]
 	 border: none;
 	 cursor: pointer;
 	 width: 178px;
-	 opacity: 0.9;
-
 }
 
 .skickat:hover
@@ -79,16 +90,15 @@ input[type=number]
 
 
 </style>
+
+
  <div class="container">
-    <h1 align="center">Recept</h1>
-	<p align="center">Skriv ner Ingredienser:</p>
+ <form method=post>
+    <input type=text placeholder="Namn" name=receptnamn id=receptname></input>
+	<p align=center>Skriv ner Ingredienser:</p>
 		<hr>
 
-	<form method=post>
-
 <?php for($i = 1; $i <= 7; $i++) { ?>
-	
-		<label style="text-align:center"><b>Ingrediens <?= $i ?></b></label><br>
 		<input type=text placeholder="Ingrediens" name=<?= "ingrediens".$i ?>>
 		<input type=number placeholder="Mängd" id=mangd name=<?= "mangd".$i ?>>
 		<select class="custom_select" name=<?= "unit".$i ?>>
@@ -98,8 +108,7 @@ input[type=number]
 			<option value="kg">kg</option>
 			<option value="g">g</option>
 			<option value="styck">styck</option>
-		</select>
-		<br>
+		</select><br>
 <?php }	?>
 
 
@@ -111,10 +120,19 @@ input[type=number]
 
 <?php
 
-function saveingrediens($ingrediens, $mangd, $unit)
-{
-	echo "saving"." ". $ingrediens." ". $mangd." ". $unit;
-	echo "<br>";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "Recepter";
+
+function saveingrediens($ingrediens, $mangd, $unit, $receptID, $conn)
+{		
+		$stmt = $conn->prepare("INSERT INTO ingredienser (Ingrediens, Mangd, Enhet, receptID) VALUES (:Ingrediens, :Mangd , :Enhet , :receptID)");
+		$stmt->bindParam(':Ingrediens', $ingrediens);
+		$stmt->bindParam(':Mangd', $mangd);
+		$stmt->bindParam(':Enhet', $unit);
+		$stmt->bindParam(':receptID', $receptID);
+		$stmt->execute(); 
 }
 
 // gör något med x och y endast om man tryckte på knappen
@@ -124,20 +142,35 @@ if(isset($_POST['skickat']))
 {
 	$ok =1;
 
+	$rn = $_POST['receptnamn'];
+	$rid = uniqid();
 	// Spara recept
 
 	// för varje Ingrediens
     // spara Ingrediens
 
+
+	
+	$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
+	$stmt = $conn->prepare("INSERT INTO recept (Id, Namn) VALUES (:Id, :Namn)");
+	$stmt->bindParam(':Namn', $rn);
+	$stmt->bindParam(':Id', $rid);
+	$stmt->execute(); 
+	
+
+
 for($i = 1; $i <= 7; $i++)
 {
+	
 	$ingrediens = $_POST['ingrediens'.$i];
 	$mangd = $_POST['mangd'.$i];
 	$unit = $_POST['unit'.$i];
 
 	if($ingrediens != "")
 	{
-		saveingrediens($ingrediens, $mangd, $unit);
+		saveingrediens($ingrediens, $mangd, $unit, $rid, $conn);
 	}
 
 }	
