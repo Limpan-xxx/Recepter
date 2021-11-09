@@ -37,11 +37,7 @@
 	</nav>
 	<div class=cards>
 
-		<div clas=cards_content>
 			<?php 
-
-				for($row['Namn'] = 0; $row['Namn'] < 1000; $row['Namn']++)
-
 				$servername = "localhost";
 				$username = "root";
 				$password = "";
@@ -52,12 +48,21 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 				$stmt = $conn->query("SELECT * FROM Recept");
-				while ($row = $stmt->fetch()) {
-					echo $row['Namn']."<br />\n";
-				}
-
+				while ($row = $stmt->fetch()) { 		
 			?>
-		</div>
+				<a href="recept_show.php?id=<?= $row['Id']?>">
+				<div class=cards_content>
+					
+						<h2><?= $row['Namn']?></h2>
+					
+				</div>
+				</a>
+			<?php } ?>
+				
+
+	
+
+				
 
 	</div>
 

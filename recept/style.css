@@ -255,14 +255,41 @@ ul
 * .cards
 {
     color: black;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
 }
 
 * .cards_content
 {
-    color: black;
+    display: flex;
+    color: #fff;
+    background-color: #168039;
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 200px;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+    transition: 0.4s;
+    text-align: center;
+    align-items: center;
 }
 
+.cards_content h2
+{
+    margin: auto;
+}
+
+
+.cards_content:hover
+{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+}
+
+.cards a
+{
+    text-decoration: none;
+}
 @media screen and (max-width: 960px)
 {
     .navbar_container 
