@@ -87,12 +87,23 @@ input[type=number]
 	padding: 8px 16px;
 	cursor: pointer;
 }
+	#button
+{
+    background-color: #168039;
+	color: white;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+	font-size: 14px;
+	text-decoration: none;
+}
 
 
 </style>
 
 
  <div class="container">
+ <a href=. type=button id=button>Tillbaka</a>
  <form method=post>
     <input type=text placeholder="Namn" name=receptnamn id=receptname></input>
 	<p align=center>Skriv ner Ingredienser:</p>
@@ -114,7 +125,6 @@ input[type=number]
 
 	<hr>
 	<input type=submit class=skickat name=skickat value='Spara'>
-
 	</form> 
 </div>
 
