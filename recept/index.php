@@ -24,8 +24,7 @@
 				</div>
 				<ul class="navbar_menu">
 					<li class="navbar_btn">
-						Lägg till
-						<a href=recept.php class="button" style="margin: 10px;"> + </a>
+						<a href=recept.php class="button" style="margin: 10px;"> Lägg till </a>
 						<a href="recept.html" class="button">Inköpslista</a>
 					</li>
 				</ul>
