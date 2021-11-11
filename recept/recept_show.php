@@ -21,7 +21,7 @@ $receptlist = $stmt->fetchAll();
 //echo $recept[1];
 //var_dump ($receptlist);
 $recept = $receptlist[0];
-echo $recept["Namn"];
+echo $recept["Namn"]." ";
 
 
 $stmt2 = $conn->prepare("SELECT * FROM ingredienser WHERE receptID=:Id");
@@ -30,7 +30,7 @@ $ingredienslist = $stmt->fetchAll();
 
 while ($row = $stmt2->fetch())
 {
-    echo $row["Ingrediens"];
+    echo $row["Ingrediens"]." ";
 }
 
 ?>
