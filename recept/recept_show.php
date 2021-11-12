@@ -1,6 +1,7 @@
 <html>
 <body>
     <div class='container'>
+    <a href=. type=button id=button>Tillbaka</a>
 
         <div class='rubrik'>
             <?php
@@ -36,7 +37,7 @@
 
             while ($row = $stmt2->fetch())
             {
-                echo $row["Ingrediens"]." ";
+                echo $row["Ingrediens"]."<br>";
             }
 
             ?>
@@ -73,7 +74,17 @@
     {
         margin-left: 5px; 
         font-size: 15px;
-        
+    }
+
+    #button
+    {
+        background-color: #168039;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        text-decoration: none;
     }
 </style>
 
