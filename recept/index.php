@@ -53,8 +53,7 @@
 				<a href="recept_show.php?id=<?= $row['Id']?>">
 				<div class=cards_content>
 					
-						<h2><?= $row['Namn']?></h2>
-					
+						<h2><?= $row['Namn']?></h2>	
 				</div>
 				</a>
 			<?php } ?>
