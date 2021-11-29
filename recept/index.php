@@ -4,7 +4,7 @@
 <head> 
 	<meta charset='utf-8'>
 	<meta name="viewport" content="width=device-width, initial-scale=1" >
-	<title>Recepter - recept</title> 
+	<title>Recepter</title> 
 	<link rel='stylesheet' href='style.css'>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
@@ -36,6 +36,7 @@
 		</div>
 	</nav>
 	<div class=cards>
+		<div class=heart>♡</div>
 
 			<?php 
 				$servername = "localhost";

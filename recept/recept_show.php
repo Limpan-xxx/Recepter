@@ -30,32 +30,35 @@
             <hr>
         </div>
         <div class='innehall'>
-            <?php
-            $stmt2 = $conn->prepare("SELECT * FROM ingredienser WHERE receptID=:Id");
-            $stmt2->execute(array(':Id' => $id));
-            $ingredienslist = $stmt->fetchAll();
+            <div class='ingredienser'>
+                <?php
+                $stmt2 = $conn->prepare("SELECT * FROM ingredienser WHERE receptID=:Id");
+                $stmt2->execute(array(':Id' => $id));
+                $ingredienslist = $stmt->fetchAll();
 
-            while ($row = $stmt2->fetch())
-            {
-                echo $row["Ingrediens"]."<br>";
-            }
+                while ($row = $stmt2->fetch())
+                {
+                    echo $row["Ingrediens"]." ".$row["Mangd"]." ".$row["Enhet"]."<br>";
+                }
 
-            ?>
-        </div>
+               ?>
+            </div>
+         </div>
     </div>
 </body>
 
 <style>
     .container
     {
-     padding: 50px;
-	 background-color: white;
-	 display: block;
-	 margin-left: auto;
-	 margin-right: auto;
-	 margin-top: 30px;
-	 margin-bottom: 30px;
-	 width: 800px;
+        padding: 50px;
+        background-color: white;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        width: 800px;
+
     }
 
     body
@@ -73,7 +76,18 @@
     .innehall
     {
         margin-left: 5px; 
-        font-size: 15px;
+        font-size: 25px;
+    }
+
+    .ingredienser
+    {
+        width: auto;
+	    padding: 15px;
+	    margin: 5px 0 22px 0;
+	    display: inline-block;
+	    border: none;
+	    background: #f1f1f1;
+
     }
 
     #button
@@ -85,6 +99,12 @@
         cursor: pointer;
         font-size: 14px;
         text-decoration: none;
+        transition: 0.4s;
+    }
+
+    #button:hover
+    {
+        background-color: #FA8C38;
     }
 </style>
 

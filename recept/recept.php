@@ -60,7 +60,7 @@ input[type=number]
 
 .skickat:hover
 {
-	 background-color: #165d80;
+	 background-color: #FA8C38;
 	 color: #fff;
 	 padding: 16px 20px;
 	 cursor: pointer;
@@ -96,6 +96,12 @@ input[type=number]
 	cursor: pointer;
 	font-size: 14px;
 	text-decoration: none;
+	transition: 0.4;
+}
+
+#button:hover
+{
+	background-color: #FA8C38;
 }
 
 

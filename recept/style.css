@@ -112,7 +112,7 @@
 
 .button:hover
 {
-    background: #165d80;
+    background: #FA8C38;
     transition: all 0.3s ease;
 }
 
@@ -264,7 +264,7 @@ ul
 {
     display: flex;
     color: #fff;
-    background-color: #168039;
+    background-color: #FA8C38;
     margin-top: 30px;
     margin-left: 30px;
     width: 219px;
@@ -289,6 +289,13 @@ ul
 .cards a
 {
     text-decoration: none;
+}
+
+.heart
+{
+    position: relative; 
+    width: 20px; 
+    height: 10px;
 }
 
 @media screen and (max-width: 960px)
