@@ -272,12 +272,12 @@ ul
     border-radius: 10px;
     transition: 0.4s;
     text-align: center;
-    align-items: center;
 }
 
 .cards_content h2
 {
     margin: auto;
+    position: relative;
 }
 
 
@@ -291,11 +291,26 @@ ul
     text-decoration: none;
 }
 
-.heart
+.add
 {
-    position: relative; 
-    width: 20px; 
-    height: 10px;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    border: solid 2px #fff;
+    background-color: #fff;
+    color: #FA8C38;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 23px;
+    transition: 0.4s;
+    
+}
+
+.add:hover
+{
+    background-color: #168039;
+    border: solid 2px #168039;
+    color: #fff;
 }
 
 @media screen and (max-width: 960px)

@@ -10,3 +10,10 @@ CREATE TABLE ingredienser (
     receptID VARCHAR (50) ,
    	FOREIGN KEY (receptID) REFERENCES recept (Id)
 );  
+
+
+CREATE TABLE inkopslista (
+    Ingrediens VARCHAR (500) NOT NULL,
+    Mangd INT NOT NULL,
+    Enhet VARCHAR (50) NOT NULL,
+);  

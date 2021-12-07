@@ -1,17 +1,31 @@
 
 
 <html lang='sv'>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
 <head> 
 	<meta charset='utf-8'>
 	<meta name="viewport" content="width=device-width, initial-scale=1" >
 	<title>Recepter</title> 
-	<link rel='stylesheet' href='style.css'>
+	<?php
+	printf("<link rel='stylesheet' href='style.css?r=%d'>", rand(1,1000));
+	?>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
+
+<script>
+	function recept_add(id){
+		$.get( "recept_data.php", function( data ){
+			alert(id);
+		});
+	}
+</script>
 	<nav class="navbar">
 		<div class="navbar_logo">Recepter</div>
 		<div class="navbar_container">
@@ -25,7 +39,7 @@
 				<ul class="navbar_menu">
 					<li class="navbar_btn">
 						<a href=recept.php class="button" style="margin: 10px;"> Lägg till </a>
-						<a href="recept.html" class="button">Inköpslista</a>
+						<a href="inkopslista.php" class="button">Inköpslista</a>
 					</li>
 				</ul>
 				<div class="navbar_toggle" id="mobile-menu">
@@ -36,34 +50,26 @@
 		</div>
 	</nav>
 	<div class=cards>
-		<div class=heart>♡</div>
+		<?php 
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "Recepter";
+			$sql = "SELECT * FROM  ";
 
-			<?php 
-				$servername = "localhost";
-				$username = "root";
-				$password = "";
-				$dbname = "Recepter";
-				$sql = "SELECT * FROM  ";
+			$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-				$stmt = $conn->query("SELECT * FROM Recept");
-				while ($row = $stmt->fetch()) { 		
-			?>
-				<a href="recept_show.php?id=<?= $row['Id']?>">
-				<div class=cards_content>
-					
-						<h2><?= $row['Namn']?></h2>	
-				</div>
-				</a>
-			<?php } ?>
-				
-
-	
-
-				
-
+			$stmt = $conn->query("SELECT * FROM Recept");
+			while ($row = $stmt->fetch()) { 		
+		?>
+			<a class=namn href="recept_show.php?id=<?= $row['Id']?>">
+			<div class=cards_content>
+				<button class=add data-arg1='<?= $row['Id']?>'>+</button>
+				<h2><?= $row['Namn']?></h2>	
+			</div>
+			</a>
+		<?php } ?>
 	</div>
 
 	<script>
@@ -83,6 +89,27 @@
 			search.classList.toggle('active')
 		}
 	</script>
+
+<script>
+	
+	const adders = document.getElementsByClassName('add');
+
+	for(var i = 0; i < adders.length; i++)
+	{
+		var adder = adders[i];
+		adder.addEventListener('click', function(ev)
+		{
+			var id = ev.target.getAttribute('data-arg1');
+			ev.stopPropagation();
+			ev.preventDefault();
+			alert("getting data for " + id);
+			$.get("recept_data.php?id="+ id , function( data ){
+				alert(data);
+			});
+		}, false);
+	}
+</script>
+
 </body> 
 </html>
 
