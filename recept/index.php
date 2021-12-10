@@ -102,9 +102,9 @@
 			var id = ev.target.getAttribute('data-arg1');
 			ev.stopPropagation();
 			ev.preventDefault();
-			alert("getting data for " + id);
+			alert("Ingredienserna har lagts till i inköpslistan");
 			$.get("recept_data.php?id="+ id , function( data ){
-				alert(data);
+				
 			});
 		}, false);
 	}

@@ -19,13 +19,15 @@
                 $stmt2 = $conn->query("SELECT * FROM inkopslista");
                 while ($row = $stmt2->fetch())
                 {
-                    echo $row["Ingrediens"]." ".$row["Mangd"]." ".$row["Enhet"]."<br>";
+                    echo $row["Ingrediens"]." ".$row["Mangd"]." ".$row["Enhet"]."<a href=delete.php class=tom>x</a>"."<p>";
                 }
 
                ?>
             </div>
          </div>
-         <button class=tom>Töm Inköpslista</button>
+        <?php
+            
+        ?>
     </div>
 </body>
 
@@ -51,7 +53,7 @@
     .rubrik
     {
         text-align: center;
-        font-size: 30px;
+        font-size: 35px;
         background-color: #168039;
         color: #fff;
     }
@@ -92,20 +94,22 @@
 
     .tom
     {
-        background-color: #168039;
-        color: white;
-        padding: 16px 20px;
+        background-color: black;
+        margin-left: 7px;
+        font-size: 20px;
+        color: #168039;
         border: none;
         cursor: pointer;
-        font-size: 14px;
         text-decoration: none;
+        border-radius: 40px;
         transition: 0.4s;
     }
 
     .tom:hover
     {
-        background-color: #FA8C38;
+        background-color: red;
     }
 </style>
 
 </html>
+
