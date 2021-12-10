@@ -1,12 +1,12 @@
 <?php
 
-function saveingrediens($ingrediens, $mangd, $unit, $receptID, $conn)
+function saveingrediens($ingrediens, $mangd, $unit, $ID, $conn)
 {		
-    $stmt = $conn->prepare("INSERT INTO inkopslista (Ingrediens, Mangd, Enhet, receptID) VALUES (:Ingrediens, :Mangd , :Enhet, :receptID)");
+    $stmt = $conn->prepare("INSERT INTO inkopslista (Ingrediens, Mangd, Enhet, ID) VALUES (:Ingrediens, :Mangd , :Enhet, :ID)");
     $stmt->bindParam(':Ingrediens', $ingrediens);
     $stmt->bindParam(':Mangd', $mangd);
     $stmt->bindParam(':Enhet', $unit);
-    $stmt->bindParam(':receptID', $receptID);
+    $stmt->bindParam(':ID', $ID);
     $stmt->execute(); 
 }
 
@@ -26,8 +26,9 @@ $stmt2->execute(array(':Id' => $id));
 
 while ($row = $stmt2->fetch())
 {
-    echo $row["Ingrediens"]." ".$row["Mangd"]." ".$row["Enhet"]." ".$row["receptID"]."<br>";
-    saveingrediens($row["Ingrediens"], $row["Mangd"], $row["Enhet"], $row["receptID"], $conn);
+    $rid = uniqid();
+    echo $row["Ingrediens"]." ".$row["Mangd"]." ".$row["Enhet"]." ".$rid."<br>";
+    saveingrediens($row["Ingrediens"], $row["Mangd"], $row["Enhet"], $rid, $conn);
 }
 
 

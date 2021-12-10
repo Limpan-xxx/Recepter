@@ -8,8 +8,9 @@ $dbname = "Recepter";
 $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$id = $_GET['skit'];
+$id = $_GET['id'];
 
-$delete = mysqli_query($db,"delete from inkopslista where")
+$stmt2 = $conn->prepare("DELETE FROM inkopslista WHERE ID=:Id");
+$stmt2->execute(array(':Id' => $id));
 
 ?>

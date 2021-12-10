@@ -1,4 +1,10 @@
 <html>
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
 <body>
     <div class='container'>
     <a href =. type=button id=button>Tillbaka</a>
@@ -19,7 +25,7 @@
                 $stmt2 = $conn->query("SELECT * FROM inkopslista");
                 while ($row = $stmt2->fetch())
                 {
-                    echo $row["Ingrediens"]." ".$row["Mangd"]." ".$row["Enhet"]."<a href=delete.php class=tom>x</a>"."<p>";
+                    echo $row["Ingrediens"]." ".$row["Mangd"]." ".$row["Enhet"]."<button class=tom data-arg1='". $row['ID']."'>x</button>"."<p>";
                 }
 
                ?>
@@ -29,6 +35,31 @@
             
         ?>
     </div>
+
+    <script>
+	
+        const buttons = document.getElementsByClassName('tom');
+
+            for(var i = 0; i < buttons.length; i++)
+            {
+                var button = buttons[i];
+                button.addEventListener('click', function(ev)
+                {
+                    var id = ev.target.getAttribute('data-arg1');
+                    ev.stopPropagation();
+                    ev.preventDefault();
+                    alert("Du har raderat receptet");
+                    $.get("delete_inkopslista.php?id="+ id, function()
+                    {
+                        location.reload();
+                    }
+                    );
+                    
+                }, false);
+            }
+    </script>
+
+
 </body>
 
 <style>

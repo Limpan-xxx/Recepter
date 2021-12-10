@@ -12,8 +12,8 @@ CREATE TABLE ingredienser (
 );  
 
 
-CREATE TABLE inkopslista (
-    Ingrediens VARCHAR (500) NOT NULL,
-    Mangd INT NOT NULL,
-    Enhet VARCHAR (50) NOT NULL,
-);  
+CREATE TABLE inkopslista 
+( Ingrediens VARCHAR (500) NOT NULL, 
+Mangd INT NOT NULL, 
+Enhet VARCHAR (50) NOT NULL, 
+ID VARCHAR (50) PRIMARY KEY );
