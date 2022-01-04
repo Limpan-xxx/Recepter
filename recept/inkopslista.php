@@ -14,6 +14,9 @@
         <div class='innehall'>
             <div class='ingredienser'>
                 <?php
+
+                $ingr  = array();
+
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
@@ -25,9 +28,27 @@
                 $stmt2 = $conn->query("SELECT * FROM inkopslista");
                 while ($row = $stmt2->fetch())
                 {
-                    echo $row["Ingrediens"]." ".$row["Mangd"]." ".$row["Enhet"]."<button class=tom data-arg1='". $row['ID']."'>x</button>"."<p>";
-                }
+                    $found = false;
 
+                    for($i = 0; $i < count($ingr); $i++)
+                    {
+                        if(strcasecmp($row["Ingrediens"], $ingr[$i][0]) == 0 && $row["Enhet"] == $ingr[$i][1])
+                        {
+                            $ingr[$i] = array($row["Ingrediens"], $row["Enhet"],$row["Mangd"] + $ingr[$i][2]);
+                            $found = true;
+                        }
+                        
+                    }
+                    if(!$found)
+                    {
+                        $ingr[] = array($row["Ingrediens"], $row["Enhet"],$row["Mangd"]);
+                    }
+                }
+                
+                for($i = 0; $i < count($ingr); $i++)
+                {
+                    echo $ingr[$i][0]." ".$ingr[$i][2]." ".$ingr[$i][1]."<button class=tom data-arg1='". $ingr[$i][0]."' data-arg2='".$ingr[$i][1]."'>x</button>"."<p>";
+                }
                ?>
             </div>
          </div>
@@ -45,11 +66,12 @@
                 var button = buttons[i];
                 button.addEventListener('click', function(ev)
                 {
-                    var id = ev.target.getAttribute('data-arg1');
+                    var ingrediens = ev.target.getAttribute('data-arg1');
+                    var enhet = ev.target.getAttribute('data-arg2');
                     ev.stopPropagation();
                     ev.preventDefault();
                     alert("Du har raderat ingrediensen");
-                    $.get("delete_inkopslista.php?id="+ id, function()
+                    $.get("delete_inkopslista.php?ingrediens="+ ingrediens+"&enhet="+enhet, function()
                     {
                         location.reload();
                     }

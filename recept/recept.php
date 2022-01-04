@@ -56,6 +56,7 @@ input[type=number]
 	 border: none;
 	 cursor: pointer;
 	 width: 178px;
+	 border-radius: 4px;
 }
 
 .skickat:hover
@@ -96,6 +97,7 @@ input[type=number]
 	cursor: pointer;
 	font-size: 14px;
 	text-decoration: none;
+	border-radius: 4px;
 	transition: 0.4;
 }
 

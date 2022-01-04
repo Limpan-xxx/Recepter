@@ -99,6 +99,7 @@
         cursor: pointer;
         font-size: 14px;
         text-decoration: none;
+        border-radius: 4px;
         transition: 0.4s;
     }
 

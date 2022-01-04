@@ -8,9 +8,10 @@ $dbname = "Recepter";
 $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$id = $_GET['id'];
+$ingrediens = $_GET['ingrediens'];
+$enhet = $_GET['enhet'];
 
-$stmt2 = $conn->prepare("DELETE FROM inkopslista WHERE ID=:Id");
-$stmt2->execute(array(':Id' => $id));
+$stmt2 = $conn->prepare("DELETE FROM inkopslista WHERE Ingrediens=:ingrediens AND Enhet=:enhet");
+$stmt2->execute(array(':ingrediens' => $ingrediens, ':enhet' => $enhet));
 
 ?>
