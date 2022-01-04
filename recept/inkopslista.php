@@ -48,7 +48,7 @@
                     var id = ev.target.getAttribute('data-arg1');
                     ev.stopPropagation();
                     ev.preventDefault();
-                    alert("Du har raderat receptet");
+                    alert("Du har raderat ingrediensen");
                     $.get("delete_inkopslista.php?id="+ id, function()
                     {
                         location.reload();
@@ -116,6 +116,7 @@
         font-size: 14px;
         text-decoration: none;
         transition: 0.4s;
+        border-radius: 4px;
     }
 
     #button:hover
@@ -125,7 +126,7 @@
 
     .tom
     {
-        background-color: black;
+        background-color: none;
         margin-left: 7px;
         font-size: 20px;
         color: #168039;
@@ -139,6 +140,7 @@
     .tom:hover
     {
         background-color: red;
+        color: #fff;
     }
 </style>
 

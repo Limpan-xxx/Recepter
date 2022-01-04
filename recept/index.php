@@ -66,7 +66,8 @@
 			<a class=namn href="recept_show.php?id=<?= $row['Id']?>">
 			<div class=cards_content>
 				<button class=add data-arg1='<?= $row['Id']?>'>+</button>
-				<h2><?= $row['Namn']?></h2>	
+				<h2><?= $row['Namn']?></h2>
+				<button class=remove data-arg2='<?=$row['Id']?>'>X</button>
 			</div>
 			</a>
 		<?php } ?>
@@ -104,11 +105,33 @@
 			ev.preventDefault();
 			alert("Ingredienserna har lagts till i inköpslistan");
 			$.get("recept_data.php?id="+ id , function( data ){
-				
 			});
 		}, false);
 	}
 </script>
+
+<script>
+	
+	const buttons = document.getElementsByClassName('remove');
+
+		for(var i = 0; i < buttons.length; i++)
+		{
+			var button = buttons[i];
+			button.addEventListener('click', function(ev)
+			{
+				var Id = ev.target.getAttribute('data-arg2');
+				ev.stopPropagation();
+				ev.preventDefault();
+				alert("Du har raderat receptet");
+				$.get("delete_recept.php?id="+ Id, function()
+				{
+					location.reload();
+				}
+				);
+				
+			}, false);
+		}
+    </script>
 
 </body> 
 </html>

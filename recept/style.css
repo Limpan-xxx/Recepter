@@ -313,6 +313,28 @@ ul
     color: #fff;
 }
 
+.remove
+{
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    border: solid 2px #fff;
+    background-color: #fff;
+    color: #FA8C38;
+    margin-right: 8px;
+    margin-top: 10px;
+    font-size: 19px;
+    padding: 0px;
+    transition: 0.4s;
+}
+
+.remove:hover
+{
+    background-color: #168039;
+    border: solid 2px #168039;
+    color: #fff;
+}
+
 @media screen and (max-width: 960px)
 {
     .navbar_container 
