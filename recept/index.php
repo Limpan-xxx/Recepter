@@ -67,7 +67,7 @@
 			<div class=cards_content>
 				<button class=add data-arg1='<?= $row['Id']?>'>+</button>
 				<h2><?= $row['Namn']?></h2>
-				<button class=remove data-arg2='<?=$row['Id']?>'>X</button>
+				<button class=remove data-arg2='<?=$row['Id']?>'>x</button>
 			</div>
 			</a>
 		<?php } ?>

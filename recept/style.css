@@ -323,15 +323,15 @@ ul
     color: #FA8C38;
     margin-right: 8px;
     margin-top: 10px;
-    font-size: 19px;
+    font-size: 20px;
     padding: 0px;
     transition: 0.4s;
 }
 
 .remove:hover
 {
-    background-color: #168039;
-    border: solid 2px #168039;
+    background-color: #f10f0f;
+    border: solid 2px #f10f0f;
     color: #fff;
 }
 
