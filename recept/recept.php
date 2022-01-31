@@ -109,92 +109,103 @@ input[type=number]
 
 </style>
 
-
- <div class="container">
- <a href=. type=button id=button>Tillbaka</a>
- <form method=post>
-    <input type=text placeholder="Namn" name=receptnamn id=receptname></input>
-	<p align=center>Skriv ner Ingredienser:</p>
-		<hr>
-
-<?php for($i = 1; $i <= 7; $i++) { ?>
-		<input type=text placeholder="Ingrediens" name=<?= "ingrediens".$i ?>>
-		<input type=number placeholder="Mängd" id=mangd name=<?= "mangd".$i ?>>
-		<select class="custom_select" name=<?= "unit".$i ?>>
-			<option value=0>Enhet</option>
-			<option value="dl">dl</option>
-			<option value="liter">liter</option>
-			<option value="kg">kg</option>
-			<option value="g">g</option>
-			<option value="styck">styck</option>
-		</select><br>
-<?php }	?>
-
-
-	<hr>
-	<input type=submit class=skickat name=skickat value='Spara'>
-	</form> 
-</div>
+<div class="container">
+	<a href=. type=button id=button>Tillbaka</a>
+	<form method=post>
+		<input type=text placeholder="Namn" name=receptnamn id=receptname></input>
+		<p align=center>Skriv ner Ingredienser:</p>
+			<hr>
 
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "Recepter";
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "Recepter";
 
-function saveingrediens($ingrediens, $mangd, $unit, $receptID, $conn)
-{		
-		$stmt = $conn->prepare("INSERT INTO ingredienser (Ingrediens, Mangd, Enhet, receptID) VALUES (:Ingrediens, :Mangd , :Enhet , :receptID)");
-		$stmt->bindParam(':Ingrediens', $ingrediens);
-		$stmt->bindParam(':Mangd', $mangd);
-		$stmt->bindParam(':Enhet', $unit);
-		$stmt->bindParam(':receptID', $receptID);
-		$stmt->execute(); 
-}
-
-// gör något med x och y endast om man tryckte på knappen
-// annars visas bara formuläret
-
-if(isset($_POST['skickat']))
-{
-	$ok =1;
-
-	$rn = $_POST['receptnamn'];
-	$rid = uniqid();
-	// Spara recept
-
-	// för varje Ingrediens
-    // spara Ingrediens
-
-
-	
-	$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-	$stmt = $conn->prepare("INSERT INTO recept (Id, Namn) VALUES (:Id, :Namn)");
-	$stmt->bindParam(':Namn', $rn);
-	$stmt->bindParam(':Id', $rid);
-	$stmt->execute(); 
-	
-
-
-for($i = 1; $i <= 7; $i++)
-{
-	
-	$ingrediens = $_POST['ingrediens'.$i];
-	$mangd = $_POST['mangd'.$i];
-	$unit = $_POST['unit'.$i];
-
-	if($ingrediens != "")
-	{
-		saveingrediens($ingrediens, $mangd, $unit, $rid, $conn);
+	function saveingrediens($ingrediens, $mangd, $unit, $receptID, $conn)
+	{		
+			$stmt = $conn->prepare("INSERT INTO ingredienser (Ingrediens, Mangd, Enhet, receptID) VALUES (:Ingrediens, :Mangd , :Enhet , :receptID)");
+			$stmt->bindParam(':Ingrediens', $ingrediens);
+			$stmt->bindParam(':Mangd', $mangd);
+			$stmt->bindParam(':Enhet', $unit);
+			$stmt->bindParam(':receptID', $receptID);
+			$stmt->execute(); 
 	}
 
-}	
-	
+if(! isset($_POST['kontroll']))
+{
+	echo "Hur många ingredienser finns det i ditt recept?<br>
+		<form method=post>
+			<input type=number name=input min=1 max=35></input>
+			<input type=submit name=kontroll></input>
+		</form>";
+}
 
-	
+if( isset($_POST['kontroll']))
+{ 
+	$input = $_POST['input'];
+	?>
+	<?php for($i = 1; $i <= $input; $i++) { ?>
+			<input type=text placeholder="Ingrediens" name=<?= "ingrediens".$i ?>>
+			<input type=number placeholder="Mängd" id=mangd name=<?= "mangd".$i ?>>
+			<select class="custom_select" name=<?= "unit".$i ?>>
+				<option value=0>Enhet</option>
+				<option value="dl">dl</option>
+				<option value="liter">liter</option>
+				<option value="kg">kg</option>
+				<option value="g">g</option>
+				<option value="styck">styck</option>
+			</select><br>
+	<?php }	?>
 
+
+		<hr>
+		<input type=submit class=skickat name=skickat value='Spara'>
+		</form> 
+	</div>
+
+	<?php
+
+	// gör något med x och y endast om man tryckte på knappen
+	// annars visas bara formuläret
+
+	if(isset($_POST['skickat']))
+	{
+		$ok =1;
+
+		$rn = $_POST['receptnamn'];
+		$rid = uniqid();
+		// Spara recept
+
+		// för varje Ingrediens
+		// spara Ingrediens
+
+
+		
+		$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+		$stmt = $conn->prepare("INSERT INTO recept (Id, Namn) VALUES (:Id, :Namn)");
+		$stmt->bindParam(':Namn', $rn);
+		$stmt->bindParam(':Id', $rid);
+		$stmt->execute(); 
+		
+
+
+	for($i = 1; $i <= 7; $i++)
+	{
+		
+		$ingrediens = $_POST['ingrediens'.$i];
+		$mangd = $_POST['mangd'.$i];
+		$unit = $_POST['unit'.$i];
+
+		if($ingrediens != "")
+		{
+			saveingrediens($ingrediens, $mangd, $unit, $rid, $conn);
+		}
+
+	}	
+	}
 }
 ?>

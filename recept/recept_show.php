@@ -1,4 +1,5 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <body>
     <div class='container'>
     <a href=. type=button id=button>Tillbaka</a>
@@ -87,7 +88,6 @@
 	    display: inline-block;
 	    border: none;
 	    background: #f1f1f1;
-
     }
 
     #button
@@ -107,6 +107,38 @@
     {
         background-color: #FA8C38;
     }
+
+        @media screen and (max-width: 960px)
+        {
+            .container
+            {
+                width: 85%;
+            }
+
+            .ingredienser
+            {
+                width: 95%;
+                text-align: center;
+                margin: 0px;
+                letter-spacing: 3px;
+                font-size: 40px;
+            }
+        }
+
+            @media screen and (max-width: 425px)
+            {
+                .container
+                {
+                    width: 65%;
+                }
+
+                .ingredienser
+                {
+                    width: 82%;
+                    letter-spacing: 1px;
+                    font-size: 20px;
+                }
+            }
 </style>
 
 </html>
