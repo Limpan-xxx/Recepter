@@ -132,7 +132,7 @@ ul
 .search
 {
     position: relative;
-    width: 360px;
+    width: 374px;
     height: 60px;
     background: #fff;
     border-radius: 60px;
@@ -191,7 +191,7 @@ ul
     position: relative;
     width: 300px;
     height: 60px;
-    left: 60px;
+    left: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,9 +200,7 @@ ul
 
 .search .input input
 {
-    position: absolute;
     top: 0;
-    width: 100%;
     height: 100%;
     border: none;
     outline: none;
@@ -210,6 +208,19 @@ ul
     padding: 10px 0;
     background: #fff;
     color: #168039;
+}
+
+#search_btn
+{
+    position: relative;
+    left: 370px;
+}
+
+#search_btn:hover
+{
+    background-color: #168039;
+    color: #fff;
+    border-radius: 20px;
 }
 
 ::placeholder

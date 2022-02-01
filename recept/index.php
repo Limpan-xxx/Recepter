@@ -32,7 +32,10 @@
 				<div class="search">
 					<div class="icon"></div>
 					<div class="input">
-						<input type="text" placeholder="sök" id="mysearch">
+						<form method=post>
+							<input type="text" placeholder="recept" id="mysearch"></input>
+							<input type="submit" id=search_btn></input>
+						</form>
 					</div>
 					<span class="clear" onclick="document.getElementById('mysearch').value = '' "></span>
 				</div>
@@ -49,6 +52,7 @@
 				</div>
 		</div>
 	</nav>
+
 	<div class=cards>
 		<?php 
 			$servername = "localhost";
