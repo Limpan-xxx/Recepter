@@ -70,7 +70,6 @@
                     var enhet = ev.target.getAttribute('data-arg2');
                     ev.stopPropagation();
                     ev.preventDefault();
-                    alert("Du har raderat ingrediensen");
                     $.get("delete_inkopslista.php?ingrediens="+ ingrediens+"&enhet="+enhet, function()
                     {
                         location.reload();
