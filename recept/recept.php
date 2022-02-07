@@ -125,15 +125,17 @@ input[type=number]
 
 	function saveingrediens($ingrediens, $mangd, $unit, $receptID, $conn)
 	{		
-			$stmt = $conn->prepare("INSERT INTO ingredienser (Ingrediens, Mangd, Enhet, receptID) VALUES (:Ingrediens, :Mangd , :Enhet , :receptID)");
-			$stmt->bindParam(':Ingrediens', $ingrediens);
-			$stmt->bindParam(':Mangd', $mangd);
-			$stmt->bindParam(':Enhet', $unit);
-			$stmt->bindParam(':receptID', $receptID);
-			$stmt->execute(); 
+		$stmt = $conn->prepare("INSERT INTO ingredienser (Ingrediens, Mangd, Enhet, receptID) VALUES (:Ingrediens, :Mangd , :Enhet , :receptID)");
+		$stmt->bindParam(':Ingrediens', $ingrediens);
+		$stmt->bindParam(':Mangd', $mangd);
+		$stmt->bindParam(':Enhet', $unit);
+		$stmt->bindParam(':receptID', $receptID);
+		$stmt->execute(); 
 	}
 
-if(! isset($_POST['kontroll']))
+
+	// första gången
+if(! isset($_POST['kontroll']) && ! isset($_POST['skickat']))
 {
 	echo "Hur många ingredienser finns det i ditt recept?<br>
 		<form method=post>
@@ -142,10 +144,12 @@ if(! isset($_POST['kontroll']))
 		</form>";
 }
 
+// andra gången
 if( isset($_POST['kontroll']))
 { 
 	$input = $_POST['input'];
-	?>
+	?><input type=hidden name=safe_keeper value=<?= $input ?>></input>
+
 	<?php for($i = 1; $i <= $input; $i++) { ?>
 			<input type=text placeholder="Ingrediens" name=<?= "ingrediens".$i ?>>
 			<input type=number placeholder="Mängd" id=mangd name=<?= "mangd".$i ?>>
@@ -156,6 +160,8 @@ if( isset($_POST['kontroll']))
 				<option value="kg">kg</option>
 				<option value="g">g</option>
 				<option value="styck">styck</option>
+				<option value="tsk">tsk</option>
+				<option value="msk">msk</option>
 			</select><br>
 	<?php }	?>
 
@@ -166,34 +172,32 @@ if( isset($_POST['kontroll']))
 	</div>
 
 	<?php
-
+}
 	// gör något med x och y endast om man tryckte på knappen
 	// annars visas bara formuläret
 
-	if(isset($_POST['skickat']))
-	{
-		$ok =1;
+// tredje gången
+if(isset($_POST['skickat']))
+{
+	$ok =1;
+ 	$safe_keeper = $_POST['safe_keeper'];
 
-		$rn = $_POST['receptnamn'];
-		$rid = uniqid();
-		// Spara recept
+	$rn = $_POST['receptnamn'];
+	$rid = uniqid();
+	// Spara recept
 
-		// för varje Ingrediens
-		// spara Ingrediens
+	// för varje Ingrediens
+	// spara Ingrediens
+	
+	$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
+	$stmt = $conn->prepare("INSERT INTO recept (Id, Namn) VALUES (:Id, :Namn)");
+	$stmt->bindParam(':Namn', $rn);
+	$stmt->bindParam(':Id', $rid);
+	$stmt->execute(); 
 
-
-		
-		$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
-		$stmt = $conn->prepare("INSERT INTO recept (Id, Namn) VALUES (:Id, :Namn)");
-		$stmt->bindParam(':Namn', $rn);
-		$stmt->bindParam(':Id', $rid);
-		$stmt->execute(); 
-		
-
-
-	for($i = 1; $i <= 7; $i++)
+	for($i = 1; $i <= $safe_keeper; $i++)
 	{
 		
 		$ingrediens = $_POST['ingrediens'.$i];
@@ -203,9 +207,17 @@ if( isset($_POST['kontroll']))
 		if($ingrediens != "")
 		{
 			saveingrediens($ingrediens, $mangd, $unit, $rid, $conn);
-		}
+		}	
 
-	}	
 	}
+	
+	?> 
+		<script>
+
+			window.location.replace("index.php");
+
+		</script>
+<?php
 }
+
 ?>

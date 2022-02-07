@@ -163,6 +163,11 @@
         background-color: red;
         color: #fff;
     }
+
+    @media screen and (max-width)
+    {
+        
+    }
 </style>
 
 </html>

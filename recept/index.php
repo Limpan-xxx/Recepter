@@ -27,14 +27,14 @@
 	}
 </script>
 	<nav class="navbar">
-		<div class="navbar_logo">Recepter</div>
+		<a href="." class="navbar_logo">Recepter</a>
 		<div class="navbar_container">
 				<div class="search">
 					<div class="icon"></div>
 					<div class="input">
-						<form method=post>
-							<input type="text" placeholder="recept" id="mysearch"></input>
-							<input type="submit" id=search_btn></input>
+						<form method=get>
+							<input type="text" placeholder="sök" name="search" id="mysearch"></input>
+							<input type="submit" name="search_btn" id=search_btn></input>
 						</form>
 					</div>
 					<span class="clear" onclick="document.getElementById('mysearch').value = '' "></span>
@@ -64,18 +64,55 @@
 			$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			$stmt = $conn->query("SELECT * FROM Recept");
+			if( isset($_GET['search_btn']))
+			{
+				$search = $_GET['search'];
+				$stmt = $conn->query("SELECT * FROM recept WHERE Namn LIKE '%$search%'");
+			}
+			else
+			{
+				$stmt = $conn->query("SELECT * FROM Recept");
+			}
 			while ($row = $stmt->fetch()) { 		
 		?>
 			<a class=namn href="recept_show.php?id=<?= $row['Id']?>">
+				<div class=cards_content>
+					<button class=add data-arg1='<?= $row['Id']?>'>+</button>
+					<h2><?= $row['Namn']?></h2>
+					<button class=remove data-arg2='<?=$row['Id']?>'>x</button>
+				</div>
+			</a>
+		<?php } ?>
+	</div>
+
+<?php /* if( isset($_GET['search_btn']))
+{?>
+	<div class=cards>
+		<?php
+		$search = $_GET['search'];
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "Recepter";
+
+		$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		$stmt = $conn->query("SELECT * FROM recept WHERE Namn LIKE '%$search%'");
+		while($row = $stmt->fetch()) {
+		?>
+		<a class=namn href="recept_show.php?id=<?= $row['Id']?>">
 			<div class=cards_content>
 				<button class=add data-arg1='<?= $row['Id']?>'>+</button>
 				<h2><?= $row['Namn']?></h2>
 				<button class=remove data-arg2='<?=$row['Id']?>'>x</button>
 			</div>
-			</a>
-		<?php } ?>
+		</a>
 	</div>
+
+<?php }
+}*/?>
+
 
 	<script>
 		const menu = document.querySelector('#mobile-menu')

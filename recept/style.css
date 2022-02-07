@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    text-decoration: none;
 }
 
 .navbar 
@@ -305,7 +306,7 @@ ul
 .add
 {
     height: 30px;
-    width: 30px;
+    min-width: 30px;
     border-radius: 5px;
     border: solid 2px #fff;
     background-color: #fff;
@@ -314,7 +315,6 @@ ul
     margin-top: 10px;
     font-size: 23px;
     transition: 0.4s;
-    
 }
 
 .add:hover
@@ -327,7 +327,7 @@ ul
 .remove
 {
     height: 30px;
-    width: 30px;
+    min-width: 30px;
     border-radius: 5px;
     border: solid 2px #fff;
     background-color: #fff;
@@ -572,6 +572,17 @@ ul
             height: 15px;
             background: #168039;
             transform: rotate(315deg);
+        }
+
+        #search_btn
+        {
+            position: relative;
+            left: 1000px;
+        }
+
+        .search .input
+        {
+            left: -38;
         }
         
         #mobile-menu.is-active .bar:nth-child(2)
