@@ -106,13 +106,39 @@ input[type=number]
 	background-color: #FA8C38;
 }
 
+.form_speciall
+{
+	text-align: center;
+}
+
+#input_speciall1
+{
+	width: 60px;
+	height: 40px;
+}
+
+#input_speciall2
+{
+	background-color: #168039;
+	color: white;
+	padding: 12px 16px;
+	cursor: pointer;
+	border: none;
+	border-radius: 4px;
+}
+
+#input_speciall2:hover
+{
+	background-color: #FA8C38;
+}
+
 
 </style>
 
 <div class="container">
 	<a href=. type=button id=button>Tillbaka</a>
-	<form method=post>
-		<input type=text placeholder="Namn" name=receptnamn id=receptname></input>
+	<form autocomplete="off" method=post>
+		<input  type=text placeholder="Namn" name=receptnamn id=receptname></input>
 		<p align=center>Skriv ner Ingredienser:</p>
 			<hr>
 
@@ -138,9 +164,9 @@ input[type=number]
 if(! isset($_POST['kontroll']) && ! isset($_POST['skickat']))
 {
 	echo "Hur många ingredienser finns det i ditt recept?<br>
-		<form method=post>
-			<input type=number name=input min=1 max=35></input>
-			<input type=submit name=kontroll></input>
+		<form autocomplete=off class=form_speciall method=post>
+			<input id=input_speciall1 type=number name=input min=1 max=35></input>
+			<input id=input_speciall2 type=submit name=kontroll value=✓></input>
 		</form>";
 }
 
@@ -151,9 +177,9 @@ if( isset($_POST['kontroll']))
 	?><input type=hidden name=safe_keeper value=<?= $input ?>></input>
 
 	<?php for($i = 1; $i <= $input; $i++) { ?>
-			<input type=text placeholder="Ingrediens" name=<?= "ingrediens".$i ?>>
-			<input type=number placeholder="Mängd" id=mangd name=<?= "mangd".$i ?>>
-			<select class="custom_select" name=<?= "unit".$i ?>>
+			<input autocomplete="off" type=text placeholder="Ingrediens" name=<?= "ingrediens".$i ?>>
+			<input autocomplete="off" type=number placeholder=Mängd id=mangd name=<?= "mangd".$i ?>>
+			<select class="custom_select"  name=<?= "unit".$i ?>>
 				<option value=0>Enhet</option>
 				<option value="dl">dl</option>
 				<option value="liter">liter</option>

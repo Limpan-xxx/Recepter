@@ -32,7 +32,7 @@
 				<div class="search">
 					<div class="icon"></div>
 					<div class="input">
-						<form method=get>
+						<form autocomplete="off" method=get>
 							<input type="text" placeholder="sök" name="search" id="mysearch"></input>
 							<input type="submit" name="search_btn" id=search_btn></input>
 						</form>
@@ -79,7 +79,7 @@
 				<div class=cards_content>
 					<button class=add data-arg1='<?= $row['Id']?>'>+</button>
 					<h2><?= $row['Namn']?></h2>
-					<button class=remove data-arg2='<?=$row['Id']?>'>x</button>
+					<button class=remove data-arg2='<?=$row['Id']?>'>✖</button>
 				</div>
 			</a>
 		<?php } ?>
@@ -144,7 +144,6 @@
 			var id = ev.target.getAttribute('data-arg1');
 			ev.stopPropagation();
 			ev.preventDefault();
-			alert("Ingredienserna har lagts till i inköpslistan");
 			$.get("recept_data.php?id="+ id , function( data ){
 			});
 		}, false);
@@ -163,7 +162,6 @@
 				var Id = ev.target.getAttribute('data-arg2');
 				ev.stopPropagation();
 				ev.preventDefault();
-				alert("Du har raderat receptet");
 				$.get("delete_recept.php?id="+ Id, function()
 				{
 					location.reload();
